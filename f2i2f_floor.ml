@@ -35,11 +35,32 @@
          m*8388608 + ftoi(ax - (iaf_mul 8388608.0 m)
 );
 
+(let rec sub1_mod m x =
+     if x >= p then
+       sub1_mod (2*m) x
+     else
+       m
+);
+
+(let rec sub2_mod p m x =
+   if x >= m then
+     if x >= p then
+       sub2_mod (p/2) m (x-p)
+     else
+       sub2_mod (p/2) m  x
+   else
+     x
+);
+
+(let modulo m x =
+   let p = sub1_mod m x in
+   sub2_mod p m x
+);
 
 (let rec itof i =
    let ai = if i < 0 then -i else i in
    if ai < 8388608 then
-     let fi = i2f (ai + 8388608) in
+x     let fi = i2f (ai + 8388608) in
      let ans = fi - 8388608.0 in
      if i < 0 then
        -ans
