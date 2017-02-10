@@ -57,9 +57,9 @@ let rec reduction_to_quopi x cs =
            kernel_sin  ((3.14159265 /. 2.0) -. x)
        else
          if cs then
-           kernel_cos x
-         else
            kernel_sin x
+         else
+           kernel_cos x
 in
 
 let rec cos x =
@@ -127,7 +127,7 @@ let rec sub_ftoi ax m =
      sub_ftoi (ax -. 8388608.0) (m+1)
 in
 
-let rec ftoi x =
+let rec int_of_float x =
    let ax = if x < 0.0 then -.x else x in
    if ax >= 2147483648.0 then
      2147483647
@@ -142,9 +142,9 @@ let rec ftoi x =
      else
        let m = sub_ftoi ax 0 in
        if x < 0.0 then
-         -(m*8388608 + ftoi(ax -. (iaf_mul 8388608.0 m))) (* よくない *)
+         -(m*8388608 + int_of_float(ax -. (iaf_mul 8388608.0 m))) (* よくない *)
        else
-         m*8388608 + ftoi(ax -. (iaf_mul 8388608.0 m))
+         m*8388608 + int_of_float(ax -. (iaf_mul 8388608.0 m))
 in
 
 let rec sub1_mod m x =
@@ -169,7 +169,7 @@ let rec modulo m x =
    sub2_mod p m x
 in
 
-let rec itof i =
+let rec float_of_int i =
    let ai = if i < 0 then -i else i in
    if ai < 8388608 then
      let fi = i2f (ai + 1258291200) in
@@ -182,7 +182,7 @@ let rec itof i =
    else
      let n = (ai / 8388608) in
      let m = (modulo 8388608 ai) in
-     let ans = (iaf_mul 8388608.0 n) +. itof(m) in
+     let ans = (iaf_mul 8388608.0 n) +. float_of_int (m) in
      if i < 0 then
        -.ans
      else
