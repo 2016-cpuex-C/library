@@ -46,9 +46,9 @@ let rec reduction_to_quopi x cs =
    else 
      if x >= (3.141592 /. 2.0) then
        if cs then
-         -. reduction_to_quopi (3.141592 -. x) cs
+         reduction_to_quopi (3.141592 -. x) cs
        else 
-         reduction_to_quopi (3.141592-.x) cs
+         -. reduction_to_quopi (3.141592-.x) cs
      else 
        if x > (3.14159265 /. 4.0) then
          if cs then
@@ -80,4 +80,4 @@ let rec sin x =
      reduction_to_quopi x_red2pi true
 in
 
-()
+(print_float (sin 5.0))

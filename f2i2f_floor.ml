@@ -24,9 +24,9 @@ let rec ftoi x =
      if ax < 8388608.0 then
        let xx = ax +. 8388608.0 in
      if x < 0.0 then
-       -(f2i xx) + 8388608
+       -(f2i xx) + 1258291200
      else 
-       (f2i xx) - 8388608
+       (f2i xx) - 1258291200
      else
        let m = sub_ftoi ax 0 in
        if x < 0.0 then
@@ -60,7 +60,7 @@ in
 let rec itof i =
    let ai = if i < 0 then -i else i in
    if ai < 8388608 then
-     let fi = i2f (ai + 8388608) in
+     let fi = i2f (ai + 1258291200) in
      let ans = fi -. 8388608.0 in
      if i < 0 then
        -.ans
@@ -90,4 +90,4 @@ let rec floor x =
      else
        xx
 in
- ()
+ (print_float (floor (-.125213.3)))
