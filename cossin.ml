@@ -57,9 +57,9 @@ let rec reduction_to_quopi x cs =
            kernel_sin  ((3.14159265 /. 2.0) -. x)
        else
          if cs then
-           kernel_cos x
-         else
            kernel_sin x
+         else
+           kernel_cos x
 in
 
 let rec cos x =
@@ -79,5 +79,4 @@ let rec sin x =
      let x_red2pi = reduction_to_2pi x in
      reduction_to_quopi x_red2pi true
 in
-
-(print_float (sin 5.0))
+()
